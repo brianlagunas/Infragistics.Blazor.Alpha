@@ -1,8 +1,8 @@
-﻿using IgBlazorSamples.Business;
+﻿using IgBlazorSamples.Data.Business;
 using System;
 using System.Collections.Generic;
 
-namespace IgBlazorSamples.Services
+namespace IgBlazorSamples.Data.Services
 {
     public class StockService
     {

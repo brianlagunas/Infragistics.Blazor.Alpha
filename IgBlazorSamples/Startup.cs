@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using IgBlazorSamples.Services;
+using Infragistics.Blazor.Controls;
+using IgBlazorSamples.Data.Services;
 
 namespace IgBlazorSamples
 {
@@ -28,10 +29,13 @@ namespace IgBlazorSamples
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddInfragisticsBlazor();
+
+            services.AddSingleton<IFinancialDataService, FinancialDataService>();
+
             services.AddSingleton<CategoryChartService>();
             services.AddSingleton<StockService>();
             services.AddSingleton<ChartItemService>();
-            services.AddSingleton<GridDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +62,14 @@ namespace IgBlazorSamples
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+        }
+    }
+
+    public static class ServiceCollectionExtensions
+    {
+        public static void AddInfragisticsBlazor(this IServiceCollection services)
+        {
+            services.AddScoped(typeof(IInfragisticsBlazor), typeof(InfragisticsBlazor));
         }
     }
 }

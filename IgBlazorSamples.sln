@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29230.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IgBlazorSamples", "IgBlazorSamples\IgBlazorSamples.csproj", "{DDDC0C36-6E69-4DE9-861A-E9C6EBC7F9BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "igBlazorSamples.Client", "igBlazorSamples.Client\igBlazorSamples.Client.csproj", "{74841013-5714-43BE-9147-F9A6A67DDED9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgBlazorSamples.Data", "IgBlazorSamples.Data\IgBlazorSamples.Data.csproj", "{F6D87F5F-BD13-49D0-918E-4BAA3601F85D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{DDDC0C36-6E69-4DE9-861A-E9C6EBC7F9BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDDC0C36-6E69-4DE9-861A-E9C6EBC7F9BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDDC0C36-6E69-4DE9-861A-E9C6EBC7F9BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74841013-5714-43BE-9147-F9A6A67DDED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74841013-5714-43BE-9147-F9A6A67DDED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74841013-5714-43BE-9147-F9A6A67DDED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74841013-5714-43BE-9147-F9A6A67DDED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6D87F5F-BD13-49D0-918E-4BAA3601F85D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D87F5F-BD13-49D0-918E-4BAA3601F85D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6D87F5F-BD13-49D0-918E-4BAA3601F85D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6D87F5F-BD13-49D0-918E-4BAA3601F85D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

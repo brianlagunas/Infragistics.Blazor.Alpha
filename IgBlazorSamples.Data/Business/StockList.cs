@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace IgBlazorSamples.Business
+namespace IgBlazorSamples.Data.Business
 {
     public class StockList : List<StockItem>
     {

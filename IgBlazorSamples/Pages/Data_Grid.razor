@@ -1,0 +1,64 @@
+﻿@page "/"
+@using IgBlazorSamples.Data.Business;
+@inject IInfragisticsBlazor InfragisticsBlazor;
+@inject IgBlazorSamples.Data.Services.IFinancialDataService DataService
+
+<DataGrid Height="800px" Width="1200px" DataSource="@financialData" AutoGenerateColumns="false"
+          SelectionMode="@GridSelectionMode.SingleCell">
+    <TextColumn PropertyPath="Category" Width="125" Pinned="@PinnedPositions.Left" />
+    <TextColumn PropertyPath="Type" Width="100" />
+    <TextColumn PropertyPath="Contract" Width="125" />
+    <TextColumn PropertyPath="Settlement" Width="125" />
+    <TextColumn PropertyPath="Region" Width="125" />
+    <TextColumn PropertyPath="Country" Width="125" />
+    <NumericColumn PropertyPath="OpenPrice" HeaderText="Open Price" Width="150" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn PropertyPath="Price" HeaderText="Price" Width="150" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" Pinned="@PinnedPositions.Right" />
+    <NumericColumn PropertyPath="Change" Width="150" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="Change %" PropertyPath="ChangePercent" Width="150" PositiveSuffix="%" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="Buy" PropertyPath="Buy" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="Sell" PropertyPath="Sell" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn PropertyPath="Spread" Width="125" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn PropertyPath="Volume" Width="125" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="High D" PropertyPath="HighD" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="Low D" PropertyPath="LowD" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="High Y" PropertyPath="HighY" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="Low Y" PropertyPath="LowY" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="Start Y" PropertyPath="StartY" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <TextColumn HeaderText="Ind Grou" PropertyPath="IndGrou" Width="125" />
+    <TextColumn HeaderText="Ind Sect" PropertyPath="IndSect" Width="150" />
+    <TextColumn HeaderText="Ind Subg" PropertyPath="IndSubg" Width="125" />
+    <TextColumn HeaderText="Sec Type" PropertyPath="SecType" Width="125" />
+    <TextColumn HeaderText="Issuer N" PropertyPath="IssuerN" Width="175" />
+    <TextColumn PropertyPath="Moodys" Width="125" />
+    <TextColumn PropertyPath="Fitch" Width="125" />
+    <TextColumn HeaderText="DBRS" PropertyPath="DBRS" Width="125" />
+    <TextColumn HeaderText="CollatT" PropertyPath="CollatT" Width="125" />
+    <TextColumn PropertyPath="Security" Width="125" />
+    <TextColumn PropertyPath="Curncy" Width="125" />
+    <TextColumn PropertyPath="Sector" Width="125" />
+    <NumericColumn HeaderText="CUSIP" PropertyPath="CUSIP" Width="125" />
+    <TextColumn PropertyPath="Ticker" Width="125" />
+    <NumericColumn PropertyPath="Cpn" Width="125" />
+    <TextColumn PropertyPath="Maturity" Width="125" />
+    <NumericColumn HeaderText="ZV_SPREAD" PropertyPath="ZV_SPREAD" Width="125" />
+    <NumericColumn HeaderText="KRD_1YR" PropertyPath="KRD_1YR" Width="125" />
+    <NumericColumn HeaderText="KRD_3YR" PropertyPath="KRD_3YR" Width="125" />
+    <NumericColumn HeaderText="KRD_5YR" PropertyPath="KRD_5YR" Width="125" />
+</DataGrid>
+
+@code {
+
+    List<FinancialRecord> financialData;
+
+    protected override void OnInitialized()
+    {
+        DataGridModule.Register(InfragisticsBlazor);
+        GridColumnOptionsModule.Register(InfragisticsBlazor);
+    }
+
+    protected async override Task OnInitializedAsync()
+    {
+        financialData = await DataService.GetDataAsync(1000);
+    }
+
+}

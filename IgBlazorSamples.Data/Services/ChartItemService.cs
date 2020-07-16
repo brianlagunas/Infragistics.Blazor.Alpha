@@ -1,7 +1,7 @@
-﻿using IgBlazorSamples.Business;
+﻿using IgBlazorSamples.Data.Business;
 using System.Collections.Generic;
 
-namespace IgBlazorSamples.Services
+namespace IgBlazorSamples.Data.Services
 {
     public class ChartItemService
     {

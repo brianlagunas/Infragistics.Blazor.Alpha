@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IgBlazorSamples.Business
+namespace IgBlazorSamples.Data.Business
 {
     public class StockItem
     {
