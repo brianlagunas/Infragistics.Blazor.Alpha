@@ -8,7 +8,7 @@ namespace IgBlazorSamples.Data.Services
 {
     public interface IFinancialDataService
     {
-        Task<List<FinancialRecord>> GetDataAsync(int numberOfRecords);
+        List<FinancialRecord> GetData(int numberOfRecords);
         void StartUpdatingPrices(List<FinancialRecord> data, int frequency);
         void StartUpdatingAllPrices(List<FinancialRecord> data, int frequency);
         void StopUpdatingPrices();
@@ -18,14 +18,6 @@ namespace IgBlazorSamples.Data.Services
     {
         Random _random = new Random();
         Timer _timer;
-
-        public Task<List<FinancialRecord>> GetDataAsync(int numberOfRecords)
-        {
-            return Task.Run(() =>
-            {
-                return GetData(numberOfRecords);
-            });
-        }
 
         public List<FinancialRecord> GetData(int numberOfRecords)
         {
@@ -130,7 +122,7 @@ namespace IgBlazorSamples.Data.Services
 
         int GenerateRandomNumber(int min, int max)
         {
-            return new Random().Next(min, max);
+            return _random.Next(min, max);
         }
 
         void RandomizePrice(FinancialRecord item)
@@ -143,7 +135,7 @@ namespace IgBlazorSamples.Data.Services
 
         private Tuple<double, double> GenerateNewPrice(double oldPrice)
         {
-            var rnd = new Random().NextDouble();
+            var rnd = _random.NextDouble();
             var volatility = 2;
 
             var changePercent = 2 * volatility * rnd;

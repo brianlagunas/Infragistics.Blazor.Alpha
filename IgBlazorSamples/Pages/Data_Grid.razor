@@ -3,8 +3,8 @@
 @inject IInfragisticsBlazor InfragisticsBlazor;
 @inject IgBlazorSamples.Data.Services.IFinancialDataService DataService
 
-<DataGrid Height="800px" Width="1200px" DataSource="@financialData" AutoGenerateColumns="false"
-          SelectionMode="@GridSelectionMode.SingleCell">
+<DataGrid Height="600px" Width="1200px" DataSource="@financialData" AutoGenerateColumns="false" EditMode="@EditModeType.Cell"
+          SelectionMode="@GridSelectionMode.RangeCell" SelectionBehavior="@GridSelectionBehavior.ModifierBased" ActivationMode="@GridActivationMode.Cell">
     <TextColumn PropertyPath="Category" Width="125" Pinned="@PinnedPositions.Left" />
     <TextColumn PropertyPath="Type" Width="100" />
     <TextColumn PropertyPath="Contract" Width="125" />
@@ -58,7 +58,6 @@
 
     protected async override Task OnInitializedAsync()
     {
-        financialData = await DataService.GetDataAsync(1000);
+        financialData = await Task.Run(() => DataService.GetData(1000));
     }
-
 }

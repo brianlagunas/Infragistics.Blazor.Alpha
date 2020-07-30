@@ -58,7 +58,6 @@
 
     protected async override Task OnInitializedAsync()
     {
-        financialData = await DataService.GetDataAsync(1000);
+        financialData = await Task.Run(()=> DataService.GetData(1000));
     }
-
 }
