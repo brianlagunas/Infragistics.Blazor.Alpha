@@ -3,10 +3,11 @@
 @inject IInfragisticsBlazor InfragisticsBlazor;
 @inject IgBlazorSamples.Data.Services.IFinancialDataService DataService
 
-<DataGrid Height="600px" Width="1200px" DataSource="@financialData" AutoGenerateColumns="false" EditMode="@EditModeType.Cell"
-          SelectionMode="@GridSelectionMode.RangeCell" SelectionBehavior="@GridSelectionBehavior.ModifierBased" ActivationMode="@GridActivationMode.Cell">
-    <TextColumn PropertyPath="Category" Width="125" Pinned="@PinnedPositions.Left" />
-    <TextColumn PropertyPath="Type" Width="100" />
+<DataGridToolbar Width="1200px" TargetGrid="dataGrid" ColumnPinning="true" ColumnChooser="true" />
+<DataGrid @ref="dataGrid" Height="600px" Width="1200px" DataSource="financialData" AutoGenerateColumns="false" EditMode="EditModeType.Cell"
+          SelectionMode="GridSelectionMode.RangeCell" SelectionBehavior="GridSelectionBehavior.ModifierBased" ActivationMode="GridActivationMode.Cell">
+    <TextColumn PropertyPath="Category" Width="125" Pinned="PinnedPositions.Left" />
+    <TextColumn Name="type" PropertyPath="Type" Width="100" />
     <TextColumn PropertyPath="Contract" Width="125" />
     <TextColumn PropertyPath="Settlement" Width="125" />
     <TextColumn PropertyPath="Region" Width="125" />
@@ -48,12 +49,15 @@
 
 @code {
 
+    DataGrid dataGrid;
+
     List<FinancialRecord> financialData;
 
     protected override void OnInitialized()
     {
         DataGridModule.Register(InfragisticsBlazor);
         GridColumnOptionsModule.Register(InfragisticsBlazor);
+        DataGridToolbarModule.Register(InfragisticsBlazor);
     }
 
     protected async override Task OnInitializedAsync()

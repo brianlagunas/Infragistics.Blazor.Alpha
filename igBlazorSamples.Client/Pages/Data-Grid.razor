@@ -3,10 +3,11 @@
 @inject IInfragisticsBlazor InfragisticsBlazor;
 @inject IgBlazorSamples.Data.Services.IFinancialDataService DataService
 
-<DataGrid Height="800px" Width="1200px" DataSource="@financialData" AutoGenerateColumns="false"
-          SelectionMode="@GridSelectionMode.SingleCell">
-    <TextColumn PropertyPath="Category" Width="125" Pinned="@PinnedPositions.Left"/>
-    <TextColumn PropertyPath="Type" Width="100" />
+<DataGridToolbar Width="1200px" TargetGrid="dataGrid" ColumnPinning="true" ColumnChooser="true" />
+<DataGrid @ref="dataGrid" Height="600px" Width="1200px" DataSource="financialData" AutoGenerateColumns="false" EditMode="EditModeType.Cell"
+          SelectionMode="GridSelectionMode.RangeCell" SelectionBehavior="GridSelectionBehavior.ModifierBased" ActivationMode="GridActivationMode.Cell">
+    <TextColumn PropertyPath="Category" Width="125" Pinned="PinnedPositions.Left" />
+    <TextColumn Name="type" PropertyPath="Type" Width="100" />
     <TextColumn PropertyPath="Contract" Width="125" />
     <TextColumn PropertyPath="Settlement" Width="125" />
     <TextColumn PropertyPath="Region" Width="125" />
@@ -15,15 +16,15 @@
     <NumericColumn PropertyPath="Price" HeaderText="Price" Width="150" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" Pinned="@PinnedPositions.Right" />
     <NumericColumn PropertyPath="Change" Width="150" MaxFractionDigits="2" MinFractionDigits="2" />
     <NumericColumn HeaderText="Change %" PropertyPath="ChangePercent" Width="150" PositiveSuffix="%" MaxFractionDigits="2" MinFractionDigits="2" />
-    <NumericColumn HeaderText="Buy" PropertyPath="Buy" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2"/>
-    <NumericColumn HeaderText="Sell" PropertyPath="Sell" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2"/>
-    <NumericColumn PropertyPath="Spread" Width="125" MaxFractionDigits="2" MinFractionDigits="2"/>
-    <NumericColumn PropertyPath="Volume" Width="125" MaxFractionDigits="2" MinFractionDigits="2"/>
-    <NumericColumn HeaderText="High D" PropertyPath="HighD" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2"/>
-    <NumericColumn HeaderText="Low D" PropertyPath="LowD" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2"/>
-    <NumericColumn HeaderText="High Y" PropertyPath="HighY" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2"/>
-    <NumericColumn HeaderText="Low Y" PropertyPath="LowY" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2"/>
-    <NumericColumn HeaderText="Start Y" PropertyPath="StartY" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2"/>
+    <NumericColumn HeaderText="Buy" PropertyPath="Buy" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="Sell" PropertyPath="Sell" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn PropertyPath="Spread" Width="125" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn PropertyPath="Volume" Width="125" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="High D" PropertyPath="HighD" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="Low D" PropertyPath="LowD" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="High Y" PropertyPath="HighY" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="Low Y" PropertyPath="LowY" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
+    <NumericColumn HeaderText="Start Y" PropertyPath="StartY" Width="125" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="2" MinFractionDigits="2" />
     <TextColumn HeaderText="Ind Grou" PropertyPath="IndGrou" Width="125" />
     <TextColumn HeaderText="Ind Sect" PropertyPath="IndSect" Width="150" />
     <TextColumn HeaderText="Ind Subg" PropertyPath="IndSubg" Width="125" />
@@ -48,16 +49,19 @@
 
 @code {
 
+    DataGrid dataGrid;
+
     List<FinancialRecord> financialData;
 
     protected override void OnInitialized()
     {
         DataGridModule.Register(InfragisticsBlazor);
         GridColumnOptionsModule.Register(InfragisticsBlazor);
+        DataGridToolbarModule.Register(InfragisticsBlazor);
     }
 
     protected async override Task OnInitializedAsync()
     {
-        financialData = await Task.Run(()=> DataService.GetData(1000));
+        financialData = await Task.Run(() => DataService.GetData(1000));
     }
 }
